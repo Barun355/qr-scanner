@@ -54,7 +54,7 @@ function Layout() {
   return (
     <div className="text-white h-screen w-full flex">
       <div
-        className={`bg-gray-900 transition-all border-r border-slate-500 border- duration-200 h-full flex-col justify-between fixed flex top-0 left-0 ${
+        className={`bg-gray-900 z-10 transition-all border-r border-slate-500 border- duration-200 h-full flex-col justify-between fixed flex top-0 left-0 ${
           !sidebar ? "-translate-x-full" : "translate-x-0"
         } lg:static lg:top-auto lg:left-auto lg:translate-x-0 w-56 py-8 px-6`}
       >
