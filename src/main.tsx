@@ -4,6 +4,7 @@ import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Landing, SignIn, SignUp, Layout, Dashboard, CreateQR} from "./page"
 import QRUrl from "./page/QRUrl";
+import { DoubleLink, QR, SingleLink } from "./components";
 
 const router = createBrowserRouter([
   {
@@ -20,7 +21,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/qr/:url",
-    element: <QRUrl />
+    element: <QRUrl />,
   },
   {
     path: "/dashboard",
@@ -28,11 +29,25 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <Dashboard />,
+        element: <Dashboard />
       },
       {
         path: "create-qr",
-        element: <CreateQR />
+        element: <CreateQR />,
+        children: [
+          {
+            path: "",
+            element: <QR />,
+          },
+          {
+            path: "sl",
+            element: <SingleLink />
+          },
+          {
+            path: "dl",
+            element: <DoubleLink />
+          }
+        ]
       }
     ],
   },

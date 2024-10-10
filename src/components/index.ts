@@ -5,6 +5,9 @@ import Hero from "./Hero";
 import Header from "./Header";
 import Review from "./Review"
 import Sponsors from "./Sponsors";
+import QR from "./dashboard/create-qr/QR";
+import SingleLink from "./dashboard/create-qr/SingleLink";
+import DoubleLink from "./dashboard/create-qr/DoubleLink";
 
 
 export {
@@ -14,5 +17,8 @@ export {
     Review,
     Clients,
     Sponsors,
-    Contact
+    Contact,
+    DoubleLink,
+    SingleLink,
+    QR
 }
