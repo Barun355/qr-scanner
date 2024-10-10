@@ -53,7 +53,17 @@ function DoubleLink() {
 
   return (
     <div className="flex flex-col gap-10 md:gap-auto md:flex-row">
-      <div className="grid grid-col-1 lg:grid-cols-4 gap-4 grid-rows-3 w-full h-fit">
+      <form 
+        className="grid grid-col-1 lg:grid-cols-4 gap-4 grid-rows-3 w-full h-fit"
+        onSubmit={e => {
+          e.preventDefault();
+          if (firstUrl === "" || secondUrl === ""){
+            alert("You should enter the url.")
+            return 0;
+          }
+          setLongUrl(randomUrl(20, { all: true }))
+        }}
+      >
         <div className="flex flex-col gap-2 lg:col-start-1 lg:col-end-3">
           <label htmlFor="android-link" className="ml-1 text-xs text-slate-400">
             Android Link
@@ -64,6 +74,7 @@ function DoubleLink() {
             value={firstUrl}
             onChange={(e) => setFirstUrl(e.target.value)}
             id="android-link"
+            required
           />
         </div>
         <div className="flex flex-col gap-2 lg:col-start-3 lg:col-end-5">
@@ -75,6 +86,7 @@ function DoubleLink() {
             className="text-md bg-slate-700 rounded-md outline-none border-none py-2 pl-4 pr-6"
             id="ios-link"
             value={secondUrl}
+            required
             onChange={(e) => setSecondUrl(e.target.value)}
           />
         </div>
@@ -101,12 +113,12 @@ function DoubleLink() {
         <div className="lg:row-start-3 lg:col-start-1 lg:col-end-3 flex">
           <button
             className="border-none h-fit w-full py-2 px-4 bg-blue-800 hover:bg-blue-600 rounded-lg"
-            onClick={(_) => setLongUrl(randomUrl(20, { all: true }))}
+            type="submit"
           >
             Generate
           </button>
         </div>
-      </div>
+      </form>
       <div className="grid-rows-2 space-y-6 w-full lg:w-1/2">
         <h1 className="text-3xl">Preview</h1>
         <div className="flex flex-col gap-4">
