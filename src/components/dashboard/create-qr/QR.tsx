@@ -15,10 +15,8 @@ function QR() {
       Query.equal("userId", $id)
     ]);
     
-    console.log(data)
     const filterData:QR_DataType[] = data.documents.map(filtData => { return {$id: filtData.$id, qrUrl: filtData?.qrUrl, firstUrl: filtData?.firstUrl, secondUrl: filtData?.secondUrl, active: filtData?.active, type: filtData?.type}})
     
-    console.log(filterData)
     setQRData(filterData)
   }
 

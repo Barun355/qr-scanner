@@ -14,7 +14,6 @@ interface TableType {
 }
 
 function Table({ title, description, data }: TableType) {
-  console.log(data.body);
 
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
