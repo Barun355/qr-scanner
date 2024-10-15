@@ -10,16 +10,23 @@ function QRUrl() {
   const qrUrl = import.meta.env.VITE_BASE_URL + "/qr/" + url;
 
   useEffect(() => {
+    console.log(qrUrl, url)
     databases
       .listDocuments(DATABASE_ID, COLLECTION_ID, [
-        Query.equal("longUrl", qrUrl),
+        Query.equal("qrUrl", qrUrl),
       ])
       .then((data) => {
-        if (mobileVendor.toLocaleLowerCase().includes("apple")) {
-            window.location = data.documents[0].secondUrl
-        } else {
-            window.location = data.documents[0].firstUrl
+        console.log(data)
+        if(data.documents[0]?.type === 'double'){
+          if (mobileVendor.toLocaleLowerCase().includes("apple")) {
+              window.location = data.documents[0].secondUrl
+          } else {
+              window.location = data.documents[0].firstUrl
+          }
+        } else if (data.documents[0]?.type === 'single') {
+            window.location = data.documents[0].qrUrl
         }
+
       }).catch(err => alert(err.message));
   }, []);
   return (

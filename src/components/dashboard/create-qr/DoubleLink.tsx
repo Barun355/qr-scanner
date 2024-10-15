@@ -1,67 +1,24 @@
-import { useRef, useState } from "react";
-import { QRCodeCanvas } from "qrcode.react";
-import { account, databases, ID } from "../../../utils/appwrite";
-import { COLLECTION_ID, DATABASE_ID } from "../../../utils";
+import { useState } from "react";
 import { randomUrl } from "../../../utils/randomUrl";
+import PreviewQR from "../PreviewQR";
 
 function DoubleLink() {
-  const [longUrl, setLongUrl] = useState("");
+  const [url, setUrl] = useState("");
   const [firstUrl, setFirstUrl] = useState("");
   const [secondUrl, setSecondUrl] = useState("");
   const [active, setActive] = useState(true);
-  const [qrSize, setQrSize] = useState(200);
-
-  const qrCanvaRef = useRef<HTMLCanvasElement | null>(null);
-
-  async function handleDownloadQR() {
-    if (firstUrl === "" || secondUrl === ""){
-      alert("You should enter the url.")
-      return 0;
-    }
-
-    alert("Keep your QR safe as you will not get another copy.");
-
-    const { $id } = await account.get();
-
-    const pngUrl = qrCanvaRef?.current
-      ?.toDataURL("image/png")
-      .replace("image/png", "image/octet-stream");
-    let downloadLink = document.createElement("a");
-
-    if (pngUrl) {
-      databases
-        .createDocument(DATABASE_ID, COLLECTION_ID, ID.unique(), {
-          userId: $id,
-          longUrl: import.meta.env.VITE_BASE_URL + "/qr/" + longUrl,
-          firstUrl,
-          secondUrl,
-        })
-        .then((data) => {
-          if (data.$id) {
-            downloadLink.href = pngUrl;
-            downloadLink.download = longUrl + ".png";
-            document.body.appendChild(downloadLink);
-            downloadLink.click();
-            document.body.removeChild(downloadLink);
-          }
-        })
-        .catch((error) => {
-          alert(error?.message);
-        });
-    }
-  }
 
   return (
     <div className="flex flex-col gap-10 md:gap-auto md:flex-row">
-      <form 
+      <form
         className="grid grid-col-1 lg:grid-cols-4 gap-4 grid-rows-3 w-full h-fit"
-        onSubmit={e => {
+        onSubmit={(e) => {
           e.preventDefault();
-          if (firstUrl === "" || secondUrl === ""){
-            alert("You should enter the url.")
+          if (firstUrl === "" || secondUrl === "") {
+            alert("You should enter the url.");
             return 0;
           }
-          setLongUrl(randomUrl(20, { all: true }))
+          setUrl(randomUrl(10, { all: true }));
         }}
       >
         <div className="flex flex-col gap-2 lg:col-start-1 lg:col-end-3">
@@ -120,41 +77,7 @@ function DoubleLink() {
         </div>
       </form>
       <div className="grid-rows-2 space-y-6 w-full lg:w-1/2">
-        <h1 className="text-3xl">Preview</h1>
-        <div className="flex flex-col gap-4">
-        <div className="flex gap-2 items-center">
-            <label
-              htmlFor="qr-size"
-              className="ml-1 text-base text-slate-400"
-            >
-              QR Size (in pixel)
-            </label>
-            <input
-              type="number"
-              className="text-md bg-slate-700 rounded-md outline-none border-none py-2 px-2 w-20 text-cenl-4 pr-6"
-              value={qrSize}
-              onChange={(e) => setQrSize(Number(e.target.value))}
-              id="qr-size"
-              min={100}
-            />
-          </div>
-          <QRCodeCanvas
-            value={import.meta.env.VITE_BASE_URL + "/qr/" + longUrl}
-            title={import.meta.env.VITE_BASE_URL + "/qr/" + longUrl}
-            marginSize={2}
-            ref={qrCanvaRef}
-            id={longUrl}
-            size={qrSize}
-          />
-          
-          <button
-            className="bg-blue-800 hover:bg-blue-600 disabled:bg-slate-600 py-2 px-4 rounded-lg h-fit w-fit"
-            onClick={handleDownloadQR}
-            disabled={longUrl === ""? true: false}
-          >
-            Download QR
-          </button>
-        </div>
+        <PreviewQR qrUrl={url} url={{firstUrl, secondUrl}} type="double" active={active} />
       </div>
     </div>
   );
