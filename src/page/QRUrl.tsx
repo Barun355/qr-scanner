@@ -37,7 +37,7 @@ function QRUrl() {
       {notActive ? (
         <h1>
           QR is not active. If you own this qr then make it avaliable for
-          everyone. <a href={import.meta.env.VITE_BASE_URL+"/signin"}></a>
+          everyone. <a href={import.meta.env.VITE_BASE_URL+"/signin"}> From here</a>
         </h1>
       ) : (
         <h1>redirecting...</h1>
