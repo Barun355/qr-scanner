@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import { QR_DataType } from "../../../types/qrdata.ts";
 import { databases } from "../../utils/appwrite.ts";
 import { copyToClipBoard } from "../../utils/copyToClipBoard.ts";
@@ -11,10 +12,30 @@ interface TableType {
     header: string[];
     body: QR_DataType[];
   };
+  action?: Boolean;
+  actionName?: string;
+  handleAction?: (data: any) => void;
+  onDelete?: (data: any) => void;
 }
 
-function Table({ title, description, data }: TableType) {
-
+function Table({
+  title,
+  description,
+  data,
+  action,
+  actionName="Edit",
+  handleAction,
+  onDelete,
+}: TableType) {
+  console.log({
+    title,
+    description,
+    data,
+    action,
+    actionName,
+    handleAction,
+    onDelete,
+  });
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
       <table className="w-full text-sm text-left rtl:text-right text-gray-400">
@@ -32,12 +53,17 @@ function Table({ title, description, data }: TableType) {
                   {head}
                 </th>
               ))}
+            {action && (
+              <th scope="col" className="px-6 py-3">
+                actions
+              </th>
+            )}
           </tr>
         </thead>
         <tbody>
           {data.body?.length > 0 &&
             data.body.map(
-              ({ active, qrUrl, firstUrl, secondUrl, type, $id }) => (
+              ({ active, qrUrl, firstUrl, secondUrl, type, $id, image_id }) => (
                 <tr className="border-b bg-gray-800 border-gray-700" key={$id}>
                   <th
                     scope="row"
@@ -49,7 +75,7 @@ function Table({ title, description, data }: TableType) {
                     className="px-6 py-4 hover:bg-slate-600 cursor-pointer"
                     onClick={(_) => {
                       copyToClipBoard(qrUrl);
-                      alert("Url Copy to clipboard");
+                      toast.success("Url Copy to clipboard");
                     }}
                   >
                     {qrUrl}
@@ -70,6 +96,35 @@ function Table({ title, description, data }: TableType) {
                       }}
                     />
                   </td>
+                  {action && (
+                    <td className="px-6 py-4 flex gap-4">
+                      {/* <button
+                        className="py-4 px-2 cursor-pointer bg-blue-600 rounded-lg text-white w-20"
+                        onClick={() =>
+                          handleAction &&
+                          handleAction({
+                            active,
+                            qrUrl,
+                            firstUrl,
+                            secondUrl,
+                            image_id,
+                            type,
+                            $id,
+                          })
+                        }
+                      >
+                        {actionName}
+                      </button> */}
+                      <button
+                        className="py-4 px-2 cursor-pointer bg-red-600 rounded-lg text-white w-20"
+                        onClick={() => {
+                          onDelete && onDelete({ url_id: $id, image_id });
+                        }}
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  )}
                 </tr>
               )
             )}

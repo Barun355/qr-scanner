@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { randomUrl } from "../../../utils/randomUrl";
 import PreviewQR from "../PreviewQR";
+import { toast } from "react-toastify";
 
 function DoubleLink() {
   const [url, setUrl] = useState("");
@@ -15,7 +16,7 @@ function DoubleLink() {
         onSubmit={(e) => {
           e.preventDefault();
           if (firstUrl === "" || secondUrl === "") {
-            alert("You should enter the url.");
+            toast.error("You should enter the url.");
             return 0;
           }
           setUrl(randomUrl(10, { all: true }));
@@ -31,7 +32,6 @@ function DoubleLink() {
             value={firstUrl}
             onChange={(e) => setFirstUrl(e.target.value)}
             id="android-link"
-            required
           />
         </div>
         <div className="flex flex-col gap-2 lg:col-start-3 lg:col-end-5">
@@ -43,7 +43,6 @@ function DoubleLink() {
             className="text-md bg-slate-700 rounded-md outline-none border-none py-2 pl-4 pr-6"
             id="ios-link"
             value={secondUrl}
-            required
             onChange={(e) => setSecondUrl(e.target.value)}
           />
         </div>

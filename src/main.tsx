@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Landing, SignIn, SignUp, Layout, Dashboard, CreateQR} from "./page"
 import QRUrl from "./page/QRUrl";
 import { DoubleLink, QR, SingleLink } from "./components";
+import { ToastContainer } from "react-toastify";
 
 const router = createBrowserRouter([
   {
@@ -56,5 +57,6 @@ const router = createBrowserRouter([
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <RouterProvider router={router} />
+    <ToastContainer />
   </StrictMode>
 );

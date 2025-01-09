@@ -1,11 +1,13 @@
 import { useState } from "react";
 import PreviewQR from "../PreviewQR";
+import { toast } from "react-toastify";
+import { randomUrl } from "../../../utils/randomUrl";
 
 function SingleLink() {
   const [url, setUrl] = useState("");
   const [active, setActive] = useState(true);
 
-  const [generated, setGenerated] = useState("");
+  const [generatedUrl, setGeneratedUrl] = useState("")
 
   return (
     <div className="flex flex-col gap-10 md:gap-auto md:flex-row">
@@ -14,10 +16,10 @@ function SingleLink() {
         onSubmit={(e) => {
           e.preventDefault();
           if (url === "") {
-            alert("You should enter the url.");
+            toast.warning("You should enter the url.");
             return 0;
           }
-          setGenerated(url);
+          setGeneratedUrl(randomUrl(10, { all: true }));
         }}
       >
         <div className="flex flex-col gap-2 lg:col-start-1 lg:col-end-3">
@@ -30,7 +32,7 @@ function SingleLink() {
             value={url}
             onChange={(e) => setUrl(e.target.value)}
             id="android-link"
-            required
+            // required
           />
         </div>
 
@@ -64,7 +66,7 @@ function SingleLink() {
         </div>
       </form>
       <div className="grid-rows-2 space-y-6 w-full lg:w-1/2">
-        <PreviewQR type="single" qrUrl={generated} url={{}} active={active} />
+        <PreviewQR type="single" qrUrl={generatedUrl} url={{firstUrl: url}} active={active} />
       </div>
     </div>
   );

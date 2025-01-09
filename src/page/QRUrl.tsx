@@ -15,6 +15,7 @@ function QRUrl() {
     databases
       .listDocuments(DATABASE_ID, COLLECTION_ID, [Query.equal("qrUrl", qrUrl)])
       .then((data) => {
+        console.log(data, qrUrl)
         if (data.documents[0]?.type === "double" && data.documents[0]?.active) {
           if (mobileVendor.toLocaleLowerCase().includes("apple")) {
             window.location = data.documents[0].secondUrl;
@@ -25,7 +26,7 @@ function QRUrl() {
           data.documents[0]?.type === "single" &&
           data.documents[0]?.active
         ) {
-          window.location = data.documents[0].qrUrl;
+          window.location = data.documents[0].firstUrl;
         } else {
           setNotActive(true);
         }

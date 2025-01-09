@@ -6,4 +6,5 @@ export interface QR_DataType {
     secondUrl?: string;
     active: boolean;
     type: string;
+    image_id: string;
 }
