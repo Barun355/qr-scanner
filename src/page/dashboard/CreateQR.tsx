@@ -3,10 +3,6 @@ import { NavLink, Outlet } from "react-router-dom";
 function CreateQR() {
   const navItems = [
     {
-      label: "QR",
-      slug: "",
-    },
-    {
       label: "Single Link",
       slug: "sl",
     },

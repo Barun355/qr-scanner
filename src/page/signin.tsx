@@ -1,20 +1,30 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { account } from '../utils/appwrite';
+import { toast } from 'react-toastify';
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false)
 
   const navigate = useNavigate()
 
   const handleSignIn = async (e: any) => {
     e.preventDefault();
-    const user = await account.createEmailPasswordSession(email, password)
-    if(user){
-      setEmail("")
-      setPassword("")
-      navigate("/dashboard")
+
+    try {
+      setLoading(true)
+      const user = await account.createEmailPasswordSession(email, password)
+      setLoading(false)
+      if(user?.$id){
+        setEmail("")
+        setPassword("")
+        navigate("/dashboard")
+      }
+    } catch (err: any) {
+      toast.error(err?.message)
+      setLoading(false)
     }
   };
 
@@ -47,7 +57,8 @@ const SignIn = () => {
           </div>
           <button
             type="submit"
-            className="w-full p-3 bg-indigo-600 text-white rounded hover:bg-indigo-500 focus:outline-none"
+            className={`w-full p-3 bg-indigo-600 text-white rounded hover:bg-indigo-500 focus:outline-none ${loading && 'cursor-wait'}`}
+            aria-disabled={loading}
           >
             Sign In
           </button>

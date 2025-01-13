@@ -1,9 +1,9 @@
 import { Query } from "appwrite";
-import { COLLECTION_ID, DATABASE_ID, STORAGE_ID } from "../../../utils";
-import { account, databases, storage } from "../../../utils/appwrite";
-import Table from "../table";
+import { COLLECTION_ID, DATABASE_ID, STORAGE_ID } from "../../utils/index.ts";
+import { account, databases, storage } from "../../utils/appwrite.ts";
+import Table from "./table.tsx";
 import { useEffect, useState } from "react";
-import { QR_DataType } from "../../../../types/qrdata.ts";
+import { QR_DataType } from "../../../types/qrdata.ts";
 import { toast } from "react-toastify";
 
 function QR() {

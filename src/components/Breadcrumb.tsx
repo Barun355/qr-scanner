@@ -15,7 +15,7 @@ const Breadcrumb: React.FC = () => {
   const pathnames = location.pathname.split('/').filter((x) => x);
 
   return (
-    <nav className="bg-gray-800 py-2 px-4 text-gray-400 text-sm hidden lg:block">
+    <nav className="py-2 px-4 text-gray-400 text-sm hidden lg:block">
       <ol className="flex items-center space-x-2">
         {pathnames.map((value, index) => {
           const to = `/${pathnames.slice(0, index + 1).join('/')}`;

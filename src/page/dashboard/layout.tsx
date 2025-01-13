@@ -6,6 +6,7 @@ import { BsQrCodeScan } from "react-icons/bs";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoClose } from "react-icons/io5";
 import Breadcrumb from "../../components/Breadcrumb";
+import { FaList } from "react-icons/fa";
 
 interface NavItemType {
   label: string;
@@ -18,12 +19,17 @@ function Layout() {
     {
       label: "Dashboard",
       slug: "/dashboard",
-      Icon: <RxDashboard />,
+      Icon: <RxDashboard className="h-[1.2em] w-[1.2em]" />,
     },
     {
       label: "Create QR",
-      slug: "/dashboard/create-qr",
-      Icon: <BsQrCodeScan />,
+      slug: "/dashboard/create-qr/sl",
+      Icon: <BsQrCodeScan className="h-[1.2em] w-[1.2em]" />,
+    },
+    {
+      label: "List QR",
+      slug: "/dashboard/list-qr",
+      Icon: <FaList className="h-[1.2em] w-[1.2em]" />,
     },
   ];
 
@@ -70,13 +76,13 @@ function Layout() {
             onClick={(_) => setSidebar(false)}
           />
         </div>
-        <div className="w-full flex-1 flex-col gap-1">
+        <div className="w-full flex-1 flex-col gap-10 space-y-4">
           {navItems &&
             navItems.map(({ label, Icon, slug }: NavItemType) => (
               <Link
                 to={slug}
                 key={slug}
-                className="flex gap-4 items-center justify-start py-2 pl-2 active:bg-blue-600 hover:bg-blue-800 rounded-lg"
+                className="flex gap-4 items-center justify-start py-2 pl-2 active:bg-blue-600 hover:bg-blue-800 rounded-lg transition-colors duration-200"
               >
                 {Icon}
                 <label htmlFor={label}>{label}</label>

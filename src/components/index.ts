@@ -5,7 +5,7 @@ import Hero from "./Hero";
 import Header from "./Header";
 import Review from "./Review"
 import Sponsors from "./Sponsors";
-import QR from "./dashboard/create-qr/QR";
+import QR from "./dashboard/QR";
 import SingleLink from "./dashboard/create-qr/SingleLink";
 import DoubleLink from "./dashboard/create-qr/DoubleLink";
 
