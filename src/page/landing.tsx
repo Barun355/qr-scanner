@@ -1,5 +1,6 @@
 import { Clients, Contact, Feature, Header, Hero, Review } from "../components";
 import Footer from "../components/Footer";
+import Pricing from "../components/Pricing";
 
 function Landing() {
   return (
@@ -8,6 +9,7 @@ function Landing() {
       <Hero />
       <Clients />
       <Feature />
+      <Pricing />
       <Review />
       <Contact />
       <Footer />
