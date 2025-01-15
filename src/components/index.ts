@@ -4,7 +4,6 @@ import Feature from "./Feature"
 import Hero from "./Hero";
 import Header from "./Header";
 import Review from "./Review"
-import Sponsors from "./Sponsors";
 import QR from "./dashboard/QR";
 import SingleLink from "./dashboard/create-qr/SingleLink";
 import DoubleLink from "./dashboard/create-qr/DoubleLink";
@@ -16,7 +15,6 @@ export {
     Feature,
     Review,
     Clients,
-    Sponsors,
     Contact,
     DoubleLink,
     SingleLink,

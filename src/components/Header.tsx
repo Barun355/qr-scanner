@@ -23,45 +23,45 @@ const Header: React.FC = () => {
   }, []);
 
   return (
-    <header className="bg-gray-900 p-4">
+    <header className="bg-background p-4 border border-b-[1px] border-white/10 w-full">
       <div className="container mx-auto flex justify-between items-center">
-        <h1 className="text-2xl font-bold text-white">QR Code Generator</h1>
+        <h1 className="text-2xl font-bold text-text">Smart Scan</h1>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex md:items-center space-x-6 *:cursor-pointer *:flex *:justify-center *:items-center">
-          <Link to="/" className="text-gray-400 hover:text-white">
+          <Link to="/" className="text-text">
             Home
           </Link>
-          <Link to="#features" className="text-gray-400 hover:text-white">
+          <Link to="#features" className="text-text">
             Features
           </Link>
-          <Link to="#contact" className="text-gray-400 hover:text-white">
+          <Link to="#contact" className="text-text">
             Contact
           </Link>
-          {
-            !loggedIn ? (
-              <>
-          <Link to="/signin" className="text-gray-400 hover:text-white">
-            Sign In
-          </Link>
-          <Link to="/signup" className="text-gray-400 hover:text-white">
-            Sign Up
-          </Link>
-              </>
-            ): (
+          {!loggedIn ? (
+            <>
               <Link
-                to="/dashboard"
-                className="bg-blue-800 hover:bg-blue-500 w-fit py-2 px-4 rounded-lg"
+                to="/signin"
+                className="text-text"
               >
-                Dashboard
+                Sign In
               </Link>
-            )
-          }
-          
+              <Link to="/signup" className="text-text">
+                Sign Up
+              </Link>
+            </>
+          ) : (
+            <Link
+              to="/dashboard"
+              className="bg-primary w-fit py-2 px-4 rounded-lg"
+            >
+              Dashboard
+            </Link>
+          )}
         </nav>
 
         {/* Hamburger Button (visible on mobile) */}
-        <button className="text-white md:hidden" onClick={toggleSidebar}>
+        <button className="text-text md:hidden" onClick={toggleSidebar}>
           {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
         </button>
       </div>
@@ -75,41 +75,21 @@ const Header: React.FC = () => {
         <div className="p-4">
           <h2 className="text-2xl font-bold">QR Code Generator</h2>
           <nav className="mt-8 flex flex-col space-y-4">
-            <Link
-              to="/"
-              onClick={toggleSidebar}
-              className="hover:text-gray-400"
-            >
+            <Link to="/" onClick={toggleSidebar} className="">
               Home
             </Link>
-            <Link
-              to="#features"
-              onClick={toggleSidebar}
-              className="hover:text-gray-400"
-            >
+            <Link to="#features" onClick={toggleSidebar} className="">
               Features
             </Link>
-            <Link
-              to="#contact"
-              onClick={toggleSidebar}
-              className="hover:text-gray-400"
-            >
+            <Link to="#contact" onClick={toggleSidebar} className="">
               Contact
             </Link>
             {!loggedIn ? (
               <>
-                <Link
-                  to="/signin"
-                  onClick={toggleSidebar}
-                  className="hover:text-gray-400"
-                >
+                <Link to="/signin" onClick={toggleSidebar} className="">
                   Sign In
                 </Link>
-                <Link
-                  to="/signup"
-                  onClick={toggleSidebar}
-                  className="hover:text-gray-400"
-                >
+                <Link to="/signup" onClick={toggleSidebar} className="">
                   Sign Up
                 </Link>
               </>
@@ -117,7 +97,7 @@ const Header: React.FC = () => {
               <Link
                 to="/dashboard"
                 onClick={toggleSidebar}
-                className="bg-blue-800 hover:bg-blue-500 w-fit py-2 px-4 rounded-lg"
+                className="bg-primary w-fit py-2 px-4 rounded-lg"
               >
                 Dashboard
               </Link>

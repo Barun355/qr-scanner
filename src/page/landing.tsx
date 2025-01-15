@@ -1,15 +1,14 @@
-import { Clients, Contact, Feature, Header, Hero, Review, Sponsors } from "../components";
+import { Clients, Contact, Feature, Header, Hero, Review } from "../components";
 import Footer from "../components/Footer";
 
 function Landing() {
   return (
-    <div className="bg-gray-900 text-gray-200">
+    <div className="flex flex-col justify-center items-center">
       <Header />
       <Hero />
+      <Clients />
       <Feature />
       <Review />
-      <Sponsors />
-      <Clients />
       <Contact />
       <Footer />
     </div>

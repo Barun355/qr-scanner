@@ -69,7 +69,7 @@ function Layout() {
             to="/"
             className="cursor-pointer py-2 px-4 bg-slate-800 hover:bg-slate-600 rounded-lg"
           >
-            QR Generator
+            Smart Scan
           </Link>
           <IoClose
             className="cursor-pointer visible lg:hidden"
@@ -98,7 +98,7 @@ function Layout() {
           </button>
         </div>
       </div>
-      <div className="flex-1 flex-col bg-slate-800 h-full overflow-y-auto">
+      <div className="flex flex-col bg-slate-800 h-full w-full overflow-y-auto">
         <div className="flex justify-between bg-gray-900 pt-8 pb-4 px-8 border-b border-slate-500 sticky top-0 w-full gap-4">
           <Breadcrumb />
           <span className="h-fit w-fit px-6 py-2 bg-slate-700 rounded-full text-gray-400">Beta</span>
@@ -107,7 +107,7 @@ function Layout() {
             onClick={(_) => setSidebar(true)}
           />
         </div>
-        <div className="pt-4 h-full">
+        <div className="pt-4 grow">
           <Outlet />
         </div>
       </div>
