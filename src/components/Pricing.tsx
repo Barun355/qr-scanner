@@ -166,7 +166,7 @@ const Pricing: React.FC = () => {
               pricing.map((data) => (
                 <div
                   className={`w-[28rem] min-h-[62rem] flex flex-col items-center rounded-2xl gap-8 py-6 px-8 ${
-                    data.subscriptionType === "Events" && "scale-105"
+                    data.subscriptionType === "Events" && "scale-105 border border-white/20"
                   }`}
                   style={{
                     background:

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa"; // Icons for hamburger and close
 import { account } from "../utils/appwrite";
+import Logo from '../assets/vectors/logo-text.svg'
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,7 +26,8 @@ const Header: React.FC = () => {
   return (
     <header className="bg-background p-4 border border-b-[1px] border-white/10 w-full">
       <div className="container mx-auto flex justify-between items-center">
-        <h1 className="text-2xl font-bold text-text">Smart Scan</h1>
+        {/* <h1 className="text-2xl font-bold text-text">Smart Scan</h1> */}
+        <img src={Logo} alt="" className="w-36" />
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex md:items-center space-x-6 *:cursor-pointer *:flex *:justify-center *:items-center">
